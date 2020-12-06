@@ -1,5 +1,6 @@
 import java.util.LinkedList; 
-import java.util.Queue; 
+import java.util.Queue;
+import java.util.Random;
   
 public class TalkMeUp_tech_quiz_1 {
     public static void main (String[] args) throws InterruptedException {
@@ -30,6 +31,8 @@ public class TalkMeUp_tech_quiz_1 {
         th1.start();
         th2.start();
 
+        //Concurency
+
         th1.join();
         th2.join();
     }
@@ -41,29 +44,109 @@ public class TalkMeUp_tech_quiz_1 {
 
         public void produce() throws InterruptedException {
             int value = 0;
+
+            Random rand = new Random();
             
             while (true) {
-                //System.out.println ("Producer produced " + value);
-                if (q1.size() < q2.size()) {
-                    if (q1.size() < q3.size()){
-                        q1.add(value);
-                        int temp1 = q1.peek();
-                        //System.out.println ("Product " + temp1 + "is stored at Queue 1");
-                    }
-                    else { 
-                        q3.add (value);
-                        int temp3 = q3.peek();
-                        //System.out.println ("Product " + temp3 + "is stored at Queue 3");
-                    }
-                }
-                else {
-                    q2.add (value);
-                    int temp2 = q2.peek();
-                    //System.out.println ("Product " + temp2 + "is stored at Queue 2");
-                }
                 value++;
+                if (q1.size() == q2.size() && q2.size() == q3.size()) {
+                    int int_random = rand.nextInt(3);
 
-                Thread.sleep (100);
+                    System.out.println (int_random);
+
+                    if (int_random == 0) {
+                        q1.add(value);
+                        System.out.println ("Product " + value + " is stored at Queue 1");
+                    }
+                    else {
+                        if (int_random == 1) {
+                            q2.add (value);
+                            System.out.println ("Product " + value + " is stored at Queue 2");
+                        }
+                        else {
+                            q3.add (value);
+                            System.out.println ("Product " + value + " is stored at Queue 3");
+                        }
+                    }
+                }
+
+                else {
+                    if (q1.size() < q2.size()) {
+                        if (q1.size() < q3.size()){
+                            q1.add(value);
+                            System.out.println ("Product " + value + " is stored at Queue 1");
+                        }
+                        else {
+                            if (q3.size() == q1.size()) {
+                                int int_random = rand.nextInt(1);
+                                System.out.println (int_random);
+    
+                                if (int_random == 0) {
+                                    q1.add(value);
+                                    System.out.println ("Product " + value + " is stored at Queue 1");
+                                }
+                                else {
+                                    q3.add (value);
+                                    System.out.println ("Product " + value + " is stored at Queue 3");
+                                }                               
+                            }
+                            else {
+                                q3.add (value);
+                                System.out.println ("Product " + value + " is stored at Queue 3");
+                            }
+                        }
+                    }
+                    else {
+                        if (q1.size() < q3.size()){
+                            if (q1.size() == q2.size()) {
+                                int int_random = rand.nextInt(2);
+                                System.out.println (int_random);
+
+                                if (int_random == 0) {
+                                    q1.add(value);
+                                    System.out.println ("Product " + value + " is stored at Queue 1");
+                                }
+                                else {
+                                    q2.add (value);
+                                    System.out.println ("Product " + value + " is stored at Queue 2");
+                                }                      
+                            }
+                            else {
+                                q2.add(value);
+                                System.out.println ("Product " + value + " is stored at Queue 2");
+                            }
+                        }
+                        else {
+                            if (q2.size() == q3.size()) {
+                                int int_random = rand.nextInt(2);
+                                System.out.println (int_random);
+
+                                if (int_random == 0) {
+                                    q2.add(value);
+                                    System.out.println ("Product " + value + " is stored at Queue 2");
+                                }
+                                else {
+                                    q3.add (value);
+                                    System.out.println ("Product " + value + " is stored at Queue 3");
+                                }            
+                            }
+    
+                            else {
+                                if (q2.size() < q3.size()) {
+                                    q2.add(value);
+                                    System.out.println ("Product " + value + " is stored at Queue 2");
+                                }
+                                else {
+                                    q3.add (value);
+                                    System.out.println ("Product " + value + " is stored at Queue 3");
+                                }
+                            }
+                        }
+                    }
+                }
+
+                
+                Thread.sleep (5000);
             }
         }
 
@@ -84,7 +167,7 @@ public class TalkMeUp_tech_quiz_1 {
                     System.out.println ("Queue 3 Consumer consumes " + remVal3);
                 }
     
-                Thread.sleep (1000);
+                Thread.sleep (100);
             }
         }
     }
