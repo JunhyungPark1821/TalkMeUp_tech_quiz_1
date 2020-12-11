@@ -52,8 +52,6 @@ public class TalkMeUp_tech_quiz_1 {
                 if (q1.size() == q2.size() && q2.size() == q3.size()) {
                     int int_random = rand.nextInt(3);
 
-                    System.out.println (int_random);
-
                     if (int_random == 0) {
                         q1.add(value);
                         System.out.println ("Product " + value + " is stored at Queue 1");
@@ -79,7 +77,6 @@ public class TalkMeUp_tech_quiz_1 {
                         else {
                             if (q3.size() == q1.size()) {
                                 int int_random = rand.nextInt(1);
-                                System.out.println (int_random);
     
                                 if (int_random == 0) {
                                     q1.add(value);
@@ -100,7 +97,6 @@ public class TalkMeUp_tech_quiz_1 {
                         if (q1.size() < q3.size()){
                             if (q1.size() == q2.size()) {
                                 int int_random = rand.nextInt(2);
-                                System.out.println (int_random);
 
                                 if (int_random == 0) {
                                     q1.add(value);
@@ -119,7 +115,6 @@ public class TalkMeUp_tech_quiz_1 {
                         else {
                             if (q2.size() == q3.size()) {
                                 int int_random = rand.nextInt(2);
-                                System.out.println (int_random);
 
                                 if (int_random == 0) {
                                     q2.add(value);
@@ -167,7 +162,7 @@ public class TalkMeUp_tech_quiz_1 {
                     System.out.println ("Queue 3 Consumer consumes " + remVal3);
                 }
     
-                Thread.sleep (100);
+                Thread.sleep (10000);
             }
         }
     }
